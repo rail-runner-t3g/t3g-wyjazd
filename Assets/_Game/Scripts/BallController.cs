@@ -4,12 +4,20 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    public Material NormalMaterial;
-    public Material SelectedMaterial;
-    public Renderer MeshRenderer;
+    public Material normalMaterial;
+    public Material selectedMaterial;
+    public Renderer meshRenderer;
+    public Rigidbody rigidbody;
 
     public void Highlight(bool highlighted)
     {
-        MeshRenderer.material = highlighted ? SelectedMaterial : NormalMaterial;
+        meshRenderer.material = highlighted ? selectedMaterial : normalMaterial;
+    }
+
+    public void Throw(float force, Vector3 throwVector)
+    {
+        transform.SetParent(null);
+        rigidbody.isKinematic = false;
+        rigidbody.AddForce(throwVector * force, ForceMode.Impulse);
     }
 }
