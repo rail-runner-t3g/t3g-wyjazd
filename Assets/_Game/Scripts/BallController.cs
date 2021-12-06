@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public Material NormalMaterial;
+    public Material SelectedMaterial;
+    public Renderer MeshRenderer;
 
-    // Update is called once per frame
-    void Update()
+    public void Highlight(bool highlighted)
     {
-        
+        MeshRenderer.material = highlighted ? SelectedMaterial : NormalMaterial;
     }
 }
