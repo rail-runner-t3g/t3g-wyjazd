@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
@@ -7,7 +5,10 @@ public class BallController : MonoBehaviour
     public Material normalMaterial;
     public Material selectedMaterial;
     public Renderer meshRenderer;
-    public Rigidbody rigidbody;
+#pragma warning disable CS0109 // Sk³adowa nie ukrywa dziedziczonej sk³adowej; s³owo kluczowe new nie jest wymagane
+    public new Rigidbody rigidbody;
+#pragma warning restore CS0109 // Sk³adowa nie ukrywa dziedziczonej sk³adowej; s³owo kluczowe new nie jest wymagane
+    public GameObject ballPrefab;
 
     public void Highlight(bool highlighted)
     {
@@ -19,5 +20,15 @@ public class BallController : MonoBehaviour
         transform.SetParent(null);
         rigidbody.isKinematic = false;
         rigidbody.AddForce(throwVector * force, ForceMode.Impulse);
+        transform.tag = "ThrownBall";
+    }
+
+    public void Terminate()
+    {
+        if (PlayerController.points != 0)
+        {
+            PlayerController.points -= 1;
+        }
+        Destroy(gameObject);
     }
 }

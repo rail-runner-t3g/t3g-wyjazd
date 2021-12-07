@@ -17,6 +17,6 @@ public class CamController : MonoBehaviour
     {
         yAxis = Input.GetAxis("Mouse X") * sensitivity;
         xAxis = Input.GetAxis("Mouse Y") * sensitivity;
-        transform.eulerAngles = transform.eulerAngles + new Vector3(invert ? xAxis : -xAxis, yAxis, 0f);
+        transform.eulerAngles = transform.eulerAngles + new Vector3(invert ? xAxis : -xAxis, Mathf.Clamp(yAxis, -90, 90), 0f);
     }
 }
