@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private BallController lastBall;
     public Slider powerSlider;
     private float throwForce;
+    public RandomIntValue value;
 
     void Update()
     {
