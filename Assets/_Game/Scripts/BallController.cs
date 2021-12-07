@@ -25,9 +25,9 @@ public class BallController : MonoBehaviour
 
     public void Terminate()
     {
-        if (PlayerController.points != 0)
+        if (GameManager.Instance.points != 0)
         {
-            PlayerController.points -= 1;
+            GameManager.Instance.lifeAmout -= 1;
         }
         Destroy(gameObject);
     }
