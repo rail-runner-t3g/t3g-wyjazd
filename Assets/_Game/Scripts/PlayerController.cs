@@ -34,7 +34,8 @@ public class PlayerController : MonoBehaviour
                 highlightedBall.Highlight(false);
                 highlightedBall = null;
             }
-        } else if (!hit || !hitObject.transform.CompareTag("Ball")) 
+        }
+        else if (!hit || !hitObject.transform.CompareTag("Ball"))
         {
             if (highlightedBall != null)
             {
@@ -59,11 +60,12 @@ public class PlayerController : MonoBehaviour
                 if (throwForce <= 30f)
                 {
                     throwForce += Time.fixedDeltaTime * 4.5f;
-                } else
+                }
+                else
                 {
                     throwForce = 30;
                 }
-                
+
             }
 
             if (!Input.GetButton("Fire1") && throwForce >= 1f)
@@ -84,10 +86,9 @@ public class PlayerController : MonoBehaviour
 
         if (lastBall != null && lastBall.transform.position.y <= -4)
         {
-            lastBall.Terminate();
             lastBall.tag = "Ball";
             lastBall.rigidbody.isKinematic = true;
-            Instantiate(lastBall.gameObject, new Vector3(-1f, 0.3f, -9.8f), Quaternion.identity);
+            lastBall.transform.position = GameManager.Instance.spawnPoint.position;
             lastBall = null;
         }
     }

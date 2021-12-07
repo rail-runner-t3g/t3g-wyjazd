@@ -8,7 +8,6 @@ public class BallController : MonoBehaviour
 #pragma warning disable CS0109 // Sk³adowa nie ukrywa dziedziczonej sk³adowej; s³owo kluczowe new nie jest wymagane
     public new Rigidbody rigidbody;
 #pragma warning restore CS0109 // Sk³adowa nie ukrywa dziedziczonej sk³adowej; s³owo kluczowe new nie jest wymagane
-    public GameObject ballPrefab;
 
     public void Highlight(bool highlighted)
     {
@@ -21,14 +20,5 @@ public class BallController : MonoBehaviour
         rigidbody.isKinematic = false;
         rigidbody.AddForce(throwVector * force, ForceMode.Impulse);
         transform.tag = "ThrownBall";
-    }
-
-    public void Terminate()
-    {
-        if (GameManager.Instance.points != 0)
-        {
-            GameManager.Instance.lifeAmout -= 1;
-        }
-        Destroy(gameObject);
     }
 }
