@@ -8,14 +8,15 @@ public class PlayerController : MonoBehaviour
     private BallController grabbedBall;
 
     private BallController lastBall;
+
+    [DisabledField(disable = true)]
     public Slider powerSlider;
     private float throwForce;
     public RandomIntValue value;
 
     void Update()
     {
-        RaycastHit hitObject;
-        bool hit = Physics.Raycast(transform.position, transform.forward, out hitObject, 100f);
+        bool hit = Physics.Raycast(transform.position, transform.forward, out RaycastHit hitObject, 100f);
         Debug.DrawRay(transform.position, transform.forward * 50f, Color.blue);
 
         if (hit && grabbedBall == null && hitObject.transform.CompareTag("Ball"))
@@ -60,7 +61,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (throwForce <= 30f)
                 {
-                    throwForce += Time.fixedDeltaTime * 4.5f;
+                    throwForce += Time.deltaTime * 4.5f;
                 }
                 else
                 {
@@ -87,6 +88,7 @@ public class PlayerController : MonoBehaviour
 
         if (lastBall != null && lastBall.transform.position.y <= -4)
         {
+            GameManager.Instance.lifeAmout -= 1;
             lastBall.tag = "Ball";
             lastBall.rigidbody.isKinematic = true;
             lastBall.transform.position = GameManager.Instance.spawnPoint.position;

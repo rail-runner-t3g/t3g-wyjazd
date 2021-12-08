@@ -15,11 +15,9 @@ public class CamController : MonoBehaviour
     }
     void Update()
     {
-        if (!GameManager.Instance.cameraLocked)
-        {
-            yAxis = Input.GetAxis("Mouse X") * sensitivity;
-            xAxis = Input.GetAxis("Mouse Y") * sensitivity;
-            transform.eulerAngles = transform.eulerAngles + new Vector3(invert ? xAxis : -xAxis, Mathf.Clamp(yAxis, -90, 90), 0f);
-        }
+        yAxis = Input.GetAxis("Mouse X") * sensitivity;
+        xAxis = Input.GetAxis("Mouse Y") * sensitivity;
+        transform.eulerAngles = transform.eulerAngles + new Vector3(invert ? xAxis : -xAxis, Mathf.Clamp(yAxis, -90, 90), 0f);
+
     }
 }

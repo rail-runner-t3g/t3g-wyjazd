@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     public UnityAction OnBallEnteredBox;
     public Transform spawnPoint;
-    public bool cameraLocked = false;
     public int points;
     public int lifeAmout = 5;
 
@@ -19,19 +18,6 @@ public class GameManager : MonoBehaviour
         } else {
             Debug.LogError("There is already a game manager.");
             Destroy(gameObject);
-        }
-    }
-
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Restart();
-        }
-
-        if (lifeAmout < 0)
-        {
-            Restart();
         }
     }
 

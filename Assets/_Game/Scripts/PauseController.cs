@@ -6,25 +6,46 @@ public class PauseController : MonoBehaviour
 {
     public Canvas guiCanvas;
     public Canvas pauseCanvas;
+    public Canvas deathCanvas;
+    public CamController cam;
+    private MonoBehaviour camScript;
+
+    private void Start()
+    {
+        if (camScript == null) camScript = cam.GetComponent<CamController>();
+    }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            guiCanvas.enabled = guiCanvas.enabled == true ? false : true;
-            pauseCanvas.enabled = pauseCanvas.enabled == true ? false : true;
+            if (deathCanvas.enabled)
+            {
+                return;
+            }
+            guiCanvas.enabled = guiCanvas.enabled != true;
+            pauseCanvas.enabled = pauseCanvas.enabled != true;
         }
 
-        if (pauseCanvas.enabled == true && !GameManager.Instance.cameraLocked)
+        if (pauseCanvas.enabled == true && camScript.enabled)
         {
-            GameManager.Instance.cameraLocked = true;
+            camScript.enabled = false;
             Cursor.lockState = CursorLockMode.None;
         }
 
-        if (pauseCanvas.enabled == false && GameManager.Instance.cameraLocked)
+        if (pauseCanvas.enabled == false && camScript.enabled == false)
         {
-            GameManager.Instance.cameraLocked = false;
+            camScript.enabled = true;
             Cursor.lockState = CursorLockMode.Locked;
+        }
+
+
+        if (GameManager.Instance.lifeAmout < 0 && !deathCanvas.enabled)
+        {
+            guiCanvas.enabled = guiCanvas.enabled != true;
+            deathCanvas.enabled = deathCanvas.enabled == false;
+            camScript.enabled = false;
+            Cursor.lockState = CursorLockMode.None;
         }
     }
 
